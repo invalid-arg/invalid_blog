@@ -19,6 +19,83 @@
 </head>
 <body>
 	<h1>Invalid Argument</h1>
+	<h2>Installing node.js and creating the server</h2>
+	<p>Firstly, I'm working on a mac for this project so all instructions will be for osx. There's plenty of tutorials out there on how to install node.js on osx so I'll be brief on the installation instructions. Frankly I'd be suprised if you happened upon my blog when looking for instructions. Anyway, to make the whole process as painless as possible I chose to install homebrew, an excellent package manager for osx. To install just paste this line into your terminal prompt.</p>
+	
+	<pre><code>  ruby <(curl -fsSkL raw.github.com/mxcl/homebrew/go)</code></pre>
+	
+	<p>More advanced installation options are available <a href="https://github.com/mxcl/homebrew/wiki/Installation">here</a>. After homebrew has installed paste the following commands into your terminal</p>
+	
+	<pre><code>  brew install node</code></pre>
+	<pre><code>  curl http://npmjs.org/install.sh | sh</code></pre>
+	
+	<p>That should install node.js and the node package manager (npm). The package manager is the nuget equivalent for node. Finally, the usual test to make sure everything has installed correctly:</p>
+	
+	<pre><code>  node -v</code></pre>
+	<pre><code>  npm -v</code></pre>
+	
+	<p>Ok, now thats all sorted lets get started with setting up the server. Because this whole project is an experiment for me I've decided my blog is going to be a single page application or SPA for short. The idea being that everything will be controlled from one page, swapping and changing the html content as need. This also means the majority of the logic will be on the client as oppose to, traditionally, the server. All the data will be served up via a RESTful API. For more info on this I recommend watching the John Papa's <a href="http://www.pluralsight.com/training/Courses/TableOfContents/spa" title="Single Page Apps with HTML5, Web API, Knockout and jQuery - Online Training Course for .NET Developers">Single Page Apps with HTML5, Web API, Knockout and jQuery</a>, however his tutorial is aimed at C#.</p>
+	<p>After a bit of research it seemed I had two choices for providing a RESTful API, express or restify. Both of these libraries are mature and well used, but in the end the decision was a simple one. While resitfy focuses soley on providing an API, express has lots of additional functionality such as a templating engine, MVC etc. I'm not going to need any of this so restify it is. However there is one thing restify doesn't do and thats serve static content such as html pages, images and stylesheets. For this I found another library called connect. So to go through this quickly.</p>
+	<p>Lets create a new folder for our node application:</p>
+					
+	<pre><code>  mkdir invalid_blog</code></pre>
+	<pre><code>  cd invalid_blog</code></pre>
+					
+	<p>Install restify and connect via the npm. npm installs all packages into the root of your node application:</p>
+	
+	<pre><code>  npm install restify</code></pre>
+	<pre><code>  npm install connect</code></pre>
+	
+	<em>Note: At this point here I hit a problem installing these two packages. If they don't install correctly make sure you have xcode installed. This can be done via the app store[link]</em>
+	
+	<p>Create a new file called server.js. This file will be used as the entry point for my application:</p>
+	
+	<pre><code>  touch server.js</code></pre>
+	
+	<p>And finally crank up your favourite text editor. In my case thats textmate (sublime is pretty good too!):</p>
+	
+	<pre><code>  mate .</code></pre>
+	
+	<p>Because I'm just starting to find my way around I stole the 'hello world' example from the restify <a href="http://mcavage.github.com/node-restify/#server-api" title="API Guide | restify">website</a> and added it to my server.js file
+		
+	<pre><code>  var restify = require('restify');
+
+  function respond(req, res, next) {
+    res.send('hello ' + req.params.name);
+  }
+
+  var server = restify.createServer();
+  server.get('/hello/:name', respond);
+  server.head('/hello/:name', respond);
+
+  server.listen(8080, function() {
+    console.log('%s listening at %s', server.name, server.url);
+  });</code></pre>
+	
+	<p>This example sets up a new route <code>/hello/</code> which expects a parameter <code>:name</code>. The route then calls the method respond, that returns 'hello :name'. All this is done on localhost port 8080. To see this you need to start the server running. Go back to the terminal and type:</p>
+	
+	<pre><code>  node server.js</code></pre>
+	
+	<p>Navigate to <code>localhost:8080/hello/foo</code> to see the response in action.</p>
+	
+	<p>That's a very basic example of a restful api setup. Next thing is to make sure that my server can also serve static content. The concept behind this is to setup a route that will return content from the connect static server. So first we create a new folder to store our static content. Be it convention or not, out of habit I'm going to call this folder 'views'. Then we need to create a new instance of a static server and point it at the directory:</p>
+	
+	<pre><code>var static_docs_server = connect.static(__dirname + '/views');</code></pre>
+	
+	<p>The we need to create new restify route that will point to the static server:</p>
+	
+	<pre><code>  server.get(/\/\/*/, function(req, res, next) {
+    return static_docs_server(req, res, next);
+  });</code></pre>
+	
+	<p><em>Note: The regular expression <code>/\/\/*/</code> points towards the root url. There may be a better way of doing this, I'm not sure.</em></p>
+	
+	<p><em>Note: now that there has been a change to server.js you'll need to restart the server in order for the changes to take effect.</em></p>
+	
+	<p>Now any content in your views directory will be served from the route url except if you hit the hello url in which case it will hit the restful api. I think in practice I'll move the api into a <code>/api/</code> route.</p>
+	<p><i>Mat McLoughlin - 23/09/2012</i></p>
+	
+	<hr/>
 	<h2>Blog Post One</h2>
 	<p>Hey, so I bet your already thinking 'Well this is a crap looking blog'. Well it is, but hopefully not for long. You see for a while now I've been wanting to learn how to code in node.js and I figured the best way to start was to write a simple blogging engine (original eh?). So over the coming weeks and months this blog will hopefully start to look a little better, behave a little better and I might learn something on the way.</p>
 	<p>For a first post I thought it would be a good idea if I detailed the technologies I'm going to be using. None of the choices are based on practicality or suitability. Just purely on my need to learn something new. So here's the list:</p>

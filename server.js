@@ -20,7 +20,7 @@ server.get(/\/\/*/, function(req, res, next) {
 	return static_docs_server(req, res, next);
 });
 
-var port = process.env.port || 1337;
+var port = process.env.port || 8080;
 server.listen(port, function() {
 	console.log('%s listening at %s', server.name, server.url);
 });
