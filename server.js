@@ -1,10 +1,6 @@
 var restify = require('restify');
 var connect = require('connect');
-
-
-function respond(req, res, next) {
-	res.send('hello ' + req.params.name);
-}
+var posts = require('./api/posts');
 
 var server = restify.createServer();
 server.use(connect.logger());
@@ -12,8 +8,8 @@ server.use(restify.acceptParser(server.acceptable));
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
 
-server.get('/hello/:name', respond);
-server.head('/hello/:name', respond);
+// posts 
+//server.get('/api/posts', posts.all)
 
 var static_docs_server = connect.static(__dirname + '/views');
 server.get(/\/\/*/, function(req, res, next) {
