@@ -17,6 +17,7 @@ h1 {
 	font-weight: normal;
 	letter-spacing: -3px;
 	margin:0px;
+	margin-bottom: 20px;
 	line-height: 61px;
 }
 
@@ -28,13 +29,14 @@ h2 {
 	letter-spacing: -1px;
 	color: rgb(85, 85, 85);
 	line-height: 57px;
-	margin-bottom: 34px;
+	margin-bottom: 14px;
 }
 
 p, em {
 	font-size: 14px;
 	line-height: 23px;
 	color: rgb(102, 102, 102);
+	margin: 20px 0;
 }
 
 em { 

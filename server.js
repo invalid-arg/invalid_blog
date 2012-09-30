@@ -1,6 +1,6 @@
 var restify = require('restify');
 var connect = require('connect');
-var posts = require('./api/posts');
+var posts = require('./api/posts').Posts;
 
 var server = restify.createServer();
 server.use(connect.logger());
@@ -9,7 +9,9 @@ server.use(restify.queryParser());
 server.use(restify.bodyParser());
 
 // posts 
-//server.get('/api/posts', posts.all)
+server.get('/api/posts', posts.all)
+server.post('/api/posts', posts.create)
+
 
 var static_docs_server = connect.static(__dirname + '/views');
 server.get(/\/\/*/, function(req, res, next) {

@@ -21,6 +21,23 @@
 </head>
 <body>
 	<h1>Invalid Argument</h1>
+	<h2>The next step</h2>
+	
+	<p>There's always a big step going from a simple hello world app to something more useful when learning a new language. Node is no different. I've spent the past week looking around trying to find a clean way to implement the blog post part of my api. I didn't know which storage to use; <a href="http://www.mongodb.org/" title="MongoDB">mongodb</a>, <a href="https://www.windowsazure.com/en-us/home/features/data-management/">azure tables</a>, <a href="http://redis.io/" title="Redis">redis</a>, <a href="http://www.postgresql.org/" title="PostgreSQL: The world's most advanced open source database">postgres</a>. I didn't know which driver to use (of which there are to many to list) or even, how to structure my code.</p>
+
+	<p>Un-suprisingly there are a lot of varying opinions on which method of storage is best but I excluded postgres on the basis I've used RDBMS all my life. Redis I excluded as the word on the street is that it is more suitable for transient data than permanent.</p> 
+
+	<p>So that left me with mongodb and azure tables. Now you'd think that, as my URL suggests, I'd use azure tables as my site is hosted on there, but you'd be wrong. Because this is my first venture into document storage I figured it would be better to go with the safe bet, so mongodb it is.</p>
+
+	<p>So that's my storage sorted. Next on the list is the driver. Now at this point I'd been watching some node videos by <a href="https://twitter.com/robconery">Rob Conery</a> (They are excellent by the way you should check them out on <a href="http://tekpub.com/productions/node" title="Hello NodeJS">Tekpub</a>). One of his videos gives a comparison of redis, mongodb and postgres. During this video he mentions what is the most popular mongodb drive, <a href="https://github.com/LearnBoost/mongoose">mongoose</a>. Now mongoose is an ORM of sorts and requires you to define schemas. I wanted to stay away from all this as it felt kinda static, I think Rob agreed. Again, this whole idea was to try move away from all the things I'm used to. So I choose a driver that would allow me to throw things into the database however I wanted, I choose <a href="https://github.com/marcello3d/node-mongolian">mongolian</a>. It seems brilliant in its simplicity. Its aim is to replicate the mongodb command line functionality. I highly recommend you check it out.</p>
+
+	<p>Finally, structuring my code. I'm not going to lie, I have absolutely no idea how I'm going to do this, but I do know one thing. I'm not going to over architect it. So much of my coding is spent planning for the future. Making sure I implement something in a way that its not going to cause problems later down the line due to inflexibility. It is really important to take these things into consideration, however, I often find myself putting something in place that never gets used. It just adds un-needed complexity to the program. This time round I'm just going to write things so they work well now instead of worrying about the future. It may be a mistake, it may make my life hell in a month of two, we'll just have to see. For now:</p>
+
+	<p><strong><a href="http://en.wikipedia.org/wiki/You_ain't_gonna_need_it">Yagni</a> (You ain't gonna need it)</strong></p>
+	<p><i>Mat McLoughlin - 30/09/2012</i></p>
+	
+	<hr/>
+	
 	<h2>Installing node.js and creating the server</h2>
 	<p>Firstly, I'm working on a mac for this project so all instructions will be for osx. There's plenty of tutorials out there on how to install node.js on osx so I'll be brief on the installation instructions. Frankly I'd be suprised if you happened upon my blog when looking for instructions. Anyway, to make the whole process as painless as possible I chose to install homebrew, an excellent package manager for osx. To install just paste this line into your terminal prompt.</p>
 	
