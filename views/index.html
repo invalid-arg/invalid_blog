@@ -25,7 +25,7 @@
 	
 	<p>There's always a big step going from a simple hello world app to something more useful when learning a new language. Node is no different. I've spent the past week looking around trying to find a clean way to implement the blog post part of my api. I didn't know which storage to use; <a href="http://www.mongodb.org/" title="MongoDB">mongodb</a>, <a href="https://www.windowsazure.com/en-us/home/features/data-management/">azure tables</a>, <a href="http://redis.io/" title="Redis">redis</a>, <a href="http://www.postgresql.org/" title="PostgreSQL: The world's most advanced open source database">postgres</a>. I didn't know which driver to use (of which there are to many to list) or even, how to structure my code.</p>
 
-	<p>Un-suprisingly there are a lot of varying opinions on which method of storage is best but I excluded postgres on the basis I've used RDBMS all my life. Redis I excluded as the word on the street is that it is more suitable for transient data than permanent.</p> 
+	<p>Unsurprisingly there are a lot of varying opinions on which method of storage is best but I excluded postgres on the basis I've used RDBMS all my life. Redis I excluded as the word on the street is that it is more suitable for transient data than permanent.</p> 
 
 	<p>So that left me with mongodb and azure tables. Now you'd think that, as my URL suggests, I'd use azure tables as my site is hosted on there, but you'd be wrong. Because this is my first venture into document storage I figured it would be better to go with the safe bet, so mongodb it is.</p>
 
@@ -39,7 +39,7 @@
 	<hr/>
 	
 	<h2>Installing node.js and creating the server</h2>
-	<p>Firstly, I'm working on a mac for this project so all instructions will be for osx. There's plenty of tutorials out there on how to install node.js on osx so I'll be brief on the installation instructions. Frankly I'd be suprised if you happened upon my blog when looking for instructions. Anyway, to make the whole process as painless as possible I chose to install homebrew, an excellent package manager for osx. To install just paste this line into your terminal prompt.</p>
+	<p>Firstly, I'm working on a mac for this project so all instructions will be for osx. There's plenty of tutorials out there on how to install node.js on osx so I'll be brief on the installation instructions. Frankly I'd be surprised if you happened upon my blog when looking for instructions. Anyway, to make the whole process as painless as possible I chose to install homebrew, an excellent package manager for osx. To install just paste this line into your terminal prompt.</p>
 	
 	<pre><code>  ruby &lt;(curl -fsSkL raw.github.com/mxcl/homebrew/go)</code></pre>
 	
@@ -54,7 +54,7 @@
 	<pre><code>  npm -v</code></pre>
 	
 	<p>Ok, now thats all sorted lets get started with setting up the server. Because this whole project is an experiment for me I've decided my blog is going to be a single page application or SPA for short. The idea being that everything will be controlled from one page, swapping and changing the html content as need. This also means the majority of the logic will be on the client as oppose to, traditionally, the server. All the data will be served up via a RESTful API. For more info on this I recommend watching the John Papa's <a href="http://www.pluralsight.com/training/Courses/TableOfContents/spa" title="Single Page Apps with HTML5, Web API, Knockout and jQuery - Online Training Course for .NET Developers">Single Page Apps with HTML5, Web API, Knockout and jQuery</a>, however his tutorial is aimed at C#.</p>
-	<p>After a bit of research it seemed I had two choices for providing a RESTful API, express or restify. Both of these libraries are mature and well used, but in the end the decision was a simple one. While resitfy focuses soley on providing an API, express has lots of additional functionality such as a templating engine, MVC etc. I'm not going to need any of this so restify it is. However there is one thing restify doesn't do and thats serve static content such as html pages, images and stylesheets. For this I found another library called connect. So to go through this quickly.</p>
+	<p>After a bit of research it seemed I had two choices for providing a RESTful API, express or restify. Both of these libraries are mature and well used, but in the end the decision was a simple one. While resitfy focuses solely on providing an API, express has lots of additional functionality such as a templating engine, MVC etc. I'm not going to need any of this so restify it is. However there is one thing restify doesn't do and thats serve static content such as html pages, images and stylesheets. For this I found another library called connect. So to go through this quickly.</p>
 	<p>Lets create a new folder for our node application:</p>
 					
 	<pre><code>  mkdir invalid_blog</code></pre>
@@ -120,7 +120,7 @@
 	<p>For a first post I thought it would be a good idea if I detailed the technologies I'm going to be using. None of the choices are based on practicality or suitability. Just purely on my need to learn something new. So here's the list:</p>
 	<ul>
 		<li><a href="http://node.js.org" title="node.js">node.js</a> - This seems to be all the rage at the moment and recently I've become a fan of JavaScript, so I thought I'd give it a go. To be honest I'm probably never going to step away from my roots in C#, but I believe there is great benefit to learning new languages.</li>
-		<li><a href="http://www.mongodb.org" title="MongoDB">mongodb</a> - It seems mongodb is the defacto choice of storage when using node.js. There may be better alternatives out there but from what I can determine this is as good a choice as any to get my head around nosql.</li>
+		<li><a href="http://www.mongodb.org" title="MongoDB">mongodb</a> - It seems mongodb is the de facto choice of storage when using node.js. There may be better alternatives out there but from what I can determine this is as good a choice as any to get my head around nosql.</li>
 		<li><a href="http://www.windowsazure.com/" title="Windows Azure: Microsoft's Cloud Platform | Cloud Hosting | Cloud Services">Windows Azure</a> - I travelled down to London a few weeks back for an Azure conference and I have to say I was impressed. It was a bit of a promotion so I took everything with a pinch of salt but you can't argue with the cost savings and simplicity in which they seemed to set things up. Wether this measures up in practice is yet to be to seen.</li>
 		</ul>
 		<p>As well as the development stack I'm going to be using a couple of other tools:</p>
