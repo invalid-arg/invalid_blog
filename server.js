@@ -13,7 +13,7 @@ server.get('/api/posts', posts.all)
 server.post('/api/posts', posts.create)
 
 
-var static_docs_server = connect.static(__dirname + '/views');
+var static_docs_server = connect.static(__dirname + '/public');
 server.get(/\/\/*/, function(req, res, next) {
 	return static_docs_server(req, res, next);
 });
