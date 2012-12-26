@@ -1,6 +1,6 @@
   define('amplify', ['lib/amplify.min'], function () { return this.amplify; });
-	define('sammy', ['lib/sammy.min'], function (Sammy) { return Sammy; });
 	define('jquery', ['lib/jquery.min'], function () { return this.jQuery; });
+	define('sammy', ['lib/sammy.min'], function (Sammy) { return Sammy; });
 	define('underscore', ['lib/underscore.min'], function () { return this._; });
 	define('ko', ['lib/knockout'], function (ko) { return ko; });
 	
