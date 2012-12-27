@@ -21,6 +21,67 @@
 </head>
 <body>
 	<h1>Invalid Argument</h1>
+	<h2>Client side routing</h2>
+	
+	<p>Its been too long since I've worked on this project. The reasons? I've been busy with work and lost inspiration. However I'm back with it now.</p>
+
+	<p>My previous posts have all been about playing with mongodb and storage options. I now understand the basics of this and think its time to attack my application from another direction.</p> 
+
+	<p>Because I want to make my blog a SPA I needed some way to handle  client side routing and navigation. After a bit of thought I decided on a modification on John Papa's routing in his SPA <a href="http://www.pluralsight.com/training/Courses/TableOfContents/spa">tutorial</a> series on pluralsight. The main difference being I would lazy load both my html partials and my view models.</p>
+
+	<p>I've laid my application out as below, where each "page" of my SPA will have its own html partial and its own view model. Then I've created a router module that will get called upon start up and define all my routes. My routes are stored in a separate routes module.</p>
+	
+	<img src="images/project_layout.jpg" style="margin-bottom: 10px;"/>
+
+	<h3>The routes</h3>
+	
+	<p>Each page requires route. Each route will consist of a route definition, a html template and a view model. There may be more attributes later, we'll have to see.</p>
+	
+	<pre><code>var routes = {
+  createPost: {
+    route: '#/posts/create',
+    template: 'admin/posts/create.html',
+    viewModel: 'app/viewModels/vm.post' 
+  },
+  listPost: {
+    route: '#/posts',
+    template: 'admin/posts/index.html',
+    viewModel: 'app/viewModels/vm.posts'
+  }
+};</code></pre>
+	<br/>
+	<h3>The router</h3>
+	
+	<p>I'm using sammyjs to help with the client side routing. It works by taking advantage of the hash in the url to prevent page reloads. It then uses the route after the hash to implement on a kind of client side routing. Where each route will call a method allowing the developer to change the page content or call javascript.</p>
+	
+	<p>The router registers each of the routes upon application startup. To do this using sammy you must first declare a new sammy application defining your application element (usually a central div). Then call the .get function for each of the routes. The .get accepts a route hash and a callback function that gets fired when the route is called. Within this callback I use require (which I will talk about in a later post) to lazy load the view model javascript for the page and then load the route template into the main content.</p>
+	
+	<pre><code>var registerRoutes = function() {
+  _.each(routes, function(route) {
+    app.get(route.route, function() {
+      var container = this.$element(); // $('#app');
+      require([route.viewModel], function(viewModel) { 
+        container.load(route.template);
+      });
+    });
+   });
+}</code></pre>
+	
+	<p>After the routes have been registered. You need to start the sammy application. At this point you can also define a default route.</p>
+	
+	<pre><code>var activate = function() {
+  registerRoutes();
+  app.run(home);
+};
+	</code></pre>
+	
+	<p>To see an example of this all working go <a href="app.html">app.html</a> to and try clicking on the links. You'll notice that only the centre content gets loaded and the back button still works.
+
+<p>As mentioned all the code for this blog is stored on <a href="https://github.com/invalid-arg/invalid_blog">github</a>.</p>
+	<p><i>Mat McLoughlin - 30/09/2012</i></p>
+	
+	<hr/>
+	
 	<h2>The next step</h2>
 	
 	<p>There's always a big step going from a simple hello world app to something more useful when learning a new language. Node is no different. I've spent the past week looking around trying to find a clean way to implement the blog post part of my api. I didn't know which storage to use; <a href="http://www.mongodb.org/" title="MongoDB">mongodb</a>, <a href="https://www.windowsazure.com/en-us/home/features/data-management/">azure tables</a>, <a href="http://redis.io/" title="Redis">redis</a>, <a href="http://www.postgresql.org/" title="PostgreSQL: The world's most advanced open source database">postgres</a>. I didn't know which driver to use (of which there are to many to list) or even, how to structure my code.</p>
@@ -34,7 +95,7 @@
 	<p>Finally, structuring my code. I'm not going to lie, I have absolutely no idea how I'm going to do this, but I do know one thing. I'm not going to over architect it. So much of my coding is spent planning for the future. Making sure I implement something in a way that its not going to cause problems later down the line due to inflexibility. It is really important to take these things into consideration, however, I often find myself putting something in place that never gets used. It just adds un-needed complexity to the program. This time round I'm just going to write things so they work well now instead of worrying about the future. It may be a mistake, it may make my life hell in a month of two, we'll just have to see. For now:</p>
 
 	<p><strong><a href="http://en.wikipedia.org/wiki/You_ain't_gonna_need_it">Yagni</a> (You ain't gonna need it)</strong></p>
-	<p><i>Mat McLoughlin - 30/09/2012</i></p>
+	<p><i>Mat McLoughlin - 27/12/2012</i></p>
 	
 	<hr/>
 	
