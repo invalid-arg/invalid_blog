@@ -1,11 +1,10 @@
 define(['underscore', 'jquery', 'sammy', 'app/routes'],
 	function(_, $, Sammy, routes) {
 		
-		var
+		var home = '#/posts';
+		var app = new Sammy();
 		
-		var activate = function() {
-			var app = new Sammy();
-			
+		var registerRoutes = function() {
 			_.each(routes, function(route) {
 				app.get(route.route, function() {
 					require([route.viewModel], function(viewModel) { 
@@ -13,8 +12,11 @@ define(['underscore', 'jquery', 'sammy', 'app/routes'],
 					});
 				});
 			});
-			
-			app.run();
+		}
+		
+		var activate = function() {
+			registerRoutes();
+			app.run(home);
 		};
 		
 		return {
