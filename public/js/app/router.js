@@ -1,5 +1,8 @@
-define(['sammy', 'app/routes', 'underscore'],
-	function(Sammy, routes, _) {
+define(['underscore', 'jquery', 'sammy', 'app/routes'],
+	function(_, $, Sammy, routes) {
+		
+		var
+		
 		var activate = function() {
 			var app = new Sammy();
 			
