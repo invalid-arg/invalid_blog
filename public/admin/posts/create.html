@@ -1,2 +1,7 @@
-<h1>Create Holder</h1>
-<a href="#/posts">Back to posts</a>
+<div class="row-fluid post-title-outer">
+	<input class="span12 post-title" type="text" placeholder="Post Title" />
+</div>
+<div class="row-fluid">
+	<div data-bind="marked: post, markedOutput: '#output'" class="span6 post-editor" />
+	<div id="output" class="span6"/>
+</div>

@@ -1,5 +1,5 @@
-define(['underscore', 'jquery', 'sammy', 'app/routes'],
-	function(_, $, Sammy, routes) {
+define(['underscore', 'jquery', 'sammy', 'app/routes', 'ko'],
+	function(_, $, Sammy, routes, ko) {
 		
 		var home = '#/posts';
 		var app = new Sammy('#app');
@@ -9,7 +9,9 @@ define(['underscore', 'jquery', 'sammy', 'app/routes'],
 				app.get(route.route, function() {
 					var container = this.$element(); // $('#app');
 					require([route.viewModel], function(viewModel) { 
-						container.load(route.template);
+						container.load(route.template, function() {
+							ko.applyBindings(viewModel);
+						});
 					});
 				});
 			});
