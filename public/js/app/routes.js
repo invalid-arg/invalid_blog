@@ -2,8 +2,13 @@ define([],
 	function(vm) {
 		var routes = {
 			createPost: {
-				route: '#/posts/create',
-				template: 'admin/posts/create.html',
+				route: '#/posts/details',
+				template: 'admin/posts/details.html',
+				viewModel: 'app/viewModels/vm.post'
+			},
+			editPost: {
+				route: '#/posts/details/:id',
+				template: 'admin/posts/details.html',
 				viewModel: 'app/viewModels/vm.post'
 			},
 			listPost: {

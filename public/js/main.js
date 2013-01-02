@@ -6,7 +6,8 @@ require.config({
 		'underscore': ['//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.3/underscore-min', 'lib/underscore.min'],
 		'ko': ['http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.0', 'lib/knockout'],
 		'marked': 'lib/marked',
-		'bootstrap' : 'lib/bootstrap.min'
+		'bootstrap': 'lib/bootstrap.min',
+		'toastr': 'lib/toastr'
   },
 	shim: {
 		'sammy': {
@@ -21,6 +22,9 @@ require.config({
 		},
 		'marked': {
 			exports: 'marked'
+		},
+		'amplify' : {
+			exports: 'amplify'
 		}
 	}
 }); 

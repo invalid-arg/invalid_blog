@@ -19,3 +19,9 @@ String.prototype.replaceAll = function(token, newToken, ignoreCase) {
 		}
 		return str;
 	};
+	
+String.prototype.toPermaLink = function() {
+	var unsafeCharactersRegEx = /[^a-z0-9]*$/gi;
+	var str = this.toString();
+	return str.replace(unsafeCharactersRegEx, '').toLowerCase().replaceAll(' ','-');
+}

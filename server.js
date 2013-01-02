@@ -6,10 +6,11 @@ var server = restify.createServer();
 server.use(connect.logger());
 server.use(restify.acceptParser(server.acceptable));
 server.use(restify.queryParser());
-server.use(restify.bodyParser());
+server.use(restify.bodyParser({ mapParams: false }));
 
 // posts 
 server.get('/api/posts', posts.all)
+server.get('/api/posts/:id', posts.single)
 server.post('/api/posts', posts.create)
 
 
